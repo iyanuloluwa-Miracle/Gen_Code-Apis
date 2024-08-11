@@ -56,7 +56,7 @@ const signInUser = async (req, res) => {
       success: false,
       data: null,
       error: err.message,
-      message: null,
+      message: 'Server Error',
     });
   }
 };
