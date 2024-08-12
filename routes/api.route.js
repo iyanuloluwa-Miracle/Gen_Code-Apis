@@ -17,8 +17,6 @@ router.post('/login', authController.signInUser);
 router.post('/save-qr-code', qrCodeController.saveQRCode);
 // GET: Retrieve Single QR Codes
 router.get('/qr-codes/:userId', qrCodeController.getUserQRCodes);
-// GET: Retrieve all QR Codes
-router.get('/qrcode', qrCodeController.getAllQRCodes);
 // DELETE: Delete a QR Code by ID
 router.delete('/qrcode/:qrCodeId', qrCodeController.deleteQRCode);
 

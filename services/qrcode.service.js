@@ -33,10 +33,6 @@ const getUserQRCodes = async (userId) => {
   return qrCodes;
 };
 
-const getAllQRCodes = async () => {
-  return await QRCode.find();
-};
-
 const deleteQRCode = async (qrCodeId) => {
   // First, find the QR code in the database
   const qrCode = await QRCode.findById(qrCodeId);
@@ -58,6 +54,5 @@ const deleteQRCode = async (qrCodeId) => {
 module.exports = {
   saveQRCode,
   getUserQRCodes,
-  getAllQRCodes,
   deleteQRCode,
 };
