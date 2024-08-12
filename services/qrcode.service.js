@@ -1,4 +1,4 @@
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 const QRCode = require('../models/qrcode.model');
 
 // Cloudinary configuration (make sure this is set up)
@@ -33,7 +33,31 @@ const getUserQRCodes = async (userId) => {
   return qrCodes;
 };
 
+const getAllQRCodes = async () => {
+  return await QRCode.find();
+};
+
+const deleteQRCode = async (qrCodeId) => {
+  // First, find the QR code in the database
+  const qrCode = await QRCode.findById(qrCodeId);
+
+  if (qrCode) {
+    // Extract the public_id from the Cloudinary URL
+    const publicId = qrCode.url.split('/').pop().split('.')[0];
+
+    // Delete the QR code from Cloudinary
+    await cloudinary.uploader.destroy(`qr-codes/${publicId}`);
+
+    // Delete the QR code from the database
+    await QRCode.findByIdAndDelete(qrCodeId);
+  }
+
+  return qrCode;
+};
+
 module.exports = {
   saveQRCode,
   getUserQRCodes,
+  getAllQRCodes,
+  deleteQRCode,
 };

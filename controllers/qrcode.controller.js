@@ -41,8 +41,49 @@ const getUserQRCodes = async (req, res) => {
     });
   }
 };
+// GET: Retrieve all QR Codes
+const getAllQRCodes = async (req, res) => {
+  try {
+    const qrCodes = await qrCodeService.getAllQRCodes();
+    res.status(200).json({
+      success: true,
+      data: qrCodes,
+      message: 'All QR Codes retrieved successfully!',
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      data: null,
+      error: err.message,
+      message: 'Failed to retrieve QR Codes',
+    });
+  }
+};
+
+// DELETE: Delete a QR Code by ID
+const deleteQRCode = async (req, res) => {
+  const { qrCodeId } = req.params;
+
+  try {
+    await qrCodeService.deleteQRCode(qrCodeId);
+    res.status(200).json({
+      success: true,
+      message: 'QR Code deleted successfully!',
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message,
+      message: 'Failed to delete QR Code',
+    });
+  }
+};
+
 
 module.exports = {
   saveQRCode,
   getUserQRCodes,
+  getAllQRCodes,
+  deleteQRCode,
+
 };
