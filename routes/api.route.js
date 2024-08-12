@@ -13,6 +13,8 @@ router.post('/signup', authController.signupUser);
 router.post('/login', authController.signInUser);
 
 
+
+
 //Qrcode Routes
 // POST: Save QR Code
 router.post('/save-qr-code', qrCodeController.saveQRCode);

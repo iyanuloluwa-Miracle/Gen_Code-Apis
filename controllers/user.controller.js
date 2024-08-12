@@ -1,4 +1,4 @@
-const authService = require('../services/auth.services');
+const authService = require('../services/user.services');
 
 // Get all users
 // const getAllUsers = async (req, res) => {
