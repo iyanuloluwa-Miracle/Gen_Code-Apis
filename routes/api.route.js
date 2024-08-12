@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const authController = require('../controllers/auth.controller');
+const userController = require('../controllers/user.controller');
 const qrCodeController = require('../controllers/qrcode.controller');
 
 
@@ -19,6 +20,12 @@ router.post('/save-qr-code', qrCodeController.saveQRCode);
 router.get('/qr-codes/:userId', qrCodeController.getUserQRCodes);
 // DELETE: Delete a QR Code by ID
 router.delete('/qrcode/:qrCodeId', qrCodeController.deleteQRCode);
+
+
+// User management routes
+router.get('/users/:id', userController.getUserById);
+router.put('/users/:id', userController.updateUserById);
+router.delete('/users/:id', userController.deleteUserById);
 
 
 module.exports = router;
