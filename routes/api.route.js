@@ -2,7 +2,7 @@ const router = require('express').Router();
 const authController = require('../controllers/auth.controller');
 const userController = require('../controllers/user.controller');
 const qrCodeController = require('../controllers/qrcode.controller');
-
+const { createContactController } = require('../controllers/contact.controller');
 
 router.get('/', async (req, res, next) => {
   res.send({ message: 'Welcome to Gen_code api 🚀' });
@@ -28,6 +28,9 @@ router.delete('/qrcode/:qrCodeId', qrCodeController.deleteQRCode);
 router.get('/users/:id', userController.getUserById);
 router.put('/users/:id', userController.updateUserById);
 router.delete('/users/:id', userController.deleteUserById);
+
+//Contact Us Api routes
+router.post('/contact', createContactController);
 
 
 module.exports = router;
