@@ -61,7 +61,21 @@ const signInUser = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+    try {
+        res.status(201).json({
+            success: true,
+            message: "Log out successful!",
+        });
+    } catch (error) {
+        return next(new ErrorHandler(error.message, 500));
+    }
+};
+
+
+
 module.exports = {
   signupUser,
   signInUser,
+  logout
 };

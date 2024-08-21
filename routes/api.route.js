@@ -11,6 +11,7 @@ router.get('/', async (req, res, next) => {
 //Authentication 
 router.post('/signup', authController.signupUser);
 router.post('/login', authController.signInUser);
+router.get('/logout', authController.logout);
 
 
 
