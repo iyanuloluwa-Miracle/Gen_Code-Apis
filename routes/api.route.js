@@ -24,7 +24,6 @@ router.get('/qr-codes/:userId', qrCodeController.getUserQRCodes);
 // DELETE: Delete a QR Code by ID
 router.delete('/qrcode/:qrCodeId', qrCodeController.deleteQRCode);
 
-
 // User management routes
 router.get('/users/:id', userController.getUserById);
 router.put('/users/:id', userController.updateUserById);
