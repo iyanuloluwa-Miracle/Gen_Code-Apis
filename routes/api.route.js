@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
 router.post('/signup', authController.signupUser);
 router.post('/login', authController.signInUser);
 router.get('/logout', authController.logout);
-
+router.post('/forgot-password', authController.forgotPassword)
 
 
 

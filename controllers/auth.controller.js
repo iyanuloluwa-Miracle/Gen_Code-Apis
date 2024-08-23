@@ -72,10 +72,18 @@ const logout = async (req, res) => {
     }
 };
 
-
+const forgotPassword = async (req, res, next) => {
+  try {
+    const response = await authService.forgotPassword(req.body);
+    res.status(response.status).json(response);
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+};
 
 module.exports = {
   signupUser,
   signInUser,
-  logout
+  logout,
+  forgotPassword
 };

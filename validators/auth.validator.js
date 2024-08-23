@@ -15,7 +15,10 @@ const userLoginSchema = Joi.object({
   password: Joi.string().required(),
 });
 
-
+// Joi schema for forgot password
+const forgotPasswordSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
 
 module.exports = {
     userRegistrationSchema,
