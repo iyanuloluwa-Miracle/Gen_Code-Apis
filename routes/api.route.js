@@ -13,6 +13,7 @@ router.post('/signup', authController.signupUser);
 router.post('/login', authController.signInUser);
 router.get('/logout', authController.logout);
 router.post('/forgot-password', authController.forgotPassword)
+router.put('/reset-password', authController.resetPassword);
 
 
 
@@ -23,6 +24,7 @@ router.post('/save-qr-code', qrCodeController.saveQRCode);
 router.get('/qr-codes/:userId', qrCodeController.getUserQRCodes);
 // DELETE: Delete a QR Code by ID
 router.delete('/qrcode/:qrCodeId', qrCodeController.deleteQRCode);
+
 
 // User management routes
 router.get('/users/:id', userController.getUserById);

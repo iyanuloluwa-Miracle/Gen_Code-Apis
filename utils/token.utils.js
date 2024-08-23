@@ -25,12 +25,11 @@ const generateResetToken = async () => {
   return { token, hash };
 };
 
-const validateResetToken = async (savedTokenHash, inputToken) => {
+const validateResetToken = async (storedHash, token) => {
   try {
-    return await argon2.verify(savedTokenHash, inputToken);
+    return await argon2.verify(storedHash, token);
   } catch (err) {
-    console.error("Error verifying token:", err);
-    return false;
+    throw new Error("Token validation failed");
   }
 };
 

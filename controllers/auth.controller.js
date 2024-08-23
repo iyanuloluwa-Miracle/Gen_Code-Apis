@@ -1,6 +1,6 @@
 require("../models/database");
 const authService = require('../services/auth.services');
-const { userRegistrationSchema, userLoginSchema } = require('../validators/auth.validator');
+const { userRegistrationSchema, userLoginSchema, resetPasswordSchema } = require('../validators/auth.validator');
 
 const signupUser = async (req, res) => {
   const { error } = userRegistrationSchema.validate(req.body);
@@ -81,9 +81,38 @@ const forgotPassword = async (req, res, next) => {
   }
 };
 
+const resetPassword = async (req, res) => {
+  try {
+    const { error } = resetPasswordSchema.validate(req.body);
+
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        data: null,
+        error: error.details[0].message,
+        message: "Password reset failed",
+      });
+    }
+
+    const { email, resetToken, newPassword } = req.body;
+    const user = await authService.resetPassword(email, resetToken, newPassword);
+
+    res.status(200).json({
+      success: true,
+      data: { email: user.email },
+      message: "Password reset successful",
+    });
+  } catch (err) {
+    res.status(400).json({ success: false, error: err.message });
+  }
+};
+
+
+
 module.exports = {
   signupUser,
   signInUser,
   logout,
-  forgotPassword
+  forgotPassword,
+  resetPassword
 };

@@ -1,8 +1,7 @@
 const argon2 = require('argon2');
 const User = require('../models/auth.model');
-const { generateAccessToken, generateResetToken } = require('../utils/token.utils');
+const { generateAccessToken, generateResetToken, validateResetToken } = require('../utils/token.utils');
 const { sendResetTokenByEmail } = require('../utils/emailService');
-const { forgotPasswordSchema } = require('../validators/auth.validator'); 
 
 const signupUser = async (firstName, lastName, email, password) => {
   // Check if user already exists
@@ -74,12 +73,33 @@ const forgotPassword = async (body) => {
   };
 };
 
+const resetPassword = async (email, resetToken, newPassword) => {
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new Error("User not found");
+  }
 
+  // Validate the reset token
+  if (!validateResetToken(user.resetTokenHash, resetToken)) {
+    throw new Error("Invalid or expired reset token");
+  }
+
+  // Hash the new password
+  const hashedPassword = await argon2.hash(newPassword);
+  user.password = hashedPassword;
+  user.resetToken = null; // Clear the reset token after use
+  user.resetTokenHash = null; // Clear the reset token hash after use
+  user.resetTokenExpiry = null;
+  await user.save();
+
+  return user;
+};
 
 
 module.exports = {
   signupUser,
   signInUser,
-  forgotPassword 
+  forgotPassword,
+  resetPassword  
 
 };
