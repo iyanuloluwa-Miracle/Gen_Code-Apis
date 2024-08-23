@@ -22,7 +22,8 @@ const forgotPasswordSchema = Joi.object({
 
 module.exports = {
     userRegistrationSchema,
-    userLoginSchema
+    userLoginSchema,
+    forgotPasswordSchema
 
 
 }

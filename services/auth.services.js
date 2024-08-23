@@ -46,19 +46,9 @@ const signInUser = async (email, password) => {
 };
 
 const forgotPassword = async (body) => {
-  const { error, value } = forgotPasswordSchema.validate(body);
 
-  if (error) {
-    return {
-      success: false,
-      data: null,
-      error: error.details[0].message,
-      message: "Password reset email failed",
-      status: 400,
-    };
-  }
 
-  const { email } = value;
+  const { email } = body;
   const user = await User.findOne({ email });
   if (!user) {
     return {
