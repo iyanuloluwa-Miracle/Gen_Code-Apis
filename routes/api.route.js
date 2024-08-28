@@ -32,7 +32,7 @@ router.put('/users/:id', userController.updateUserById);
 router.delete('/users/:id', userController.deleteUserById);
 
 //Contact Us Api routes
-router.post('/contact', createContactController);
+router.post('/contact-us', createContactController);
 
 
 module.exports = router;
