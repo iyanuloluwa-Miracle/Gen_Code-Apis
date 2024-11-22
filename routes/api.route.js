@@ -3,7 +3,7 @@ const authController = require('../controllers/auth.controller');
 const userController = require('../controllers/user.controller');
 const qrCodeController = require('../controllers/qrcode.controller');
 const { createContactController } = require('../controllers/contact.controller');
-
+const authMiddleware = require("../middleware/authMiddleware");
 
 router.get('/', async (req, res, next) => {
   res.send({ message: 'Welcome to Gen_code api 🚀' });
@@ -20,15 +20,15 @@ router.put('/reset-password', authController.resetPassword);
 
 //Qrcode Routes
 // POST: Save QR Code
-router.post('/save-qr-code', qrCodeController.saveQRCode);
+router.post("/save-qr-code", authMiddleware,qrCodeController.saveQRCode);
 // GET: Retrieve Single QR Codes
-router.get('/qr-codes/:userId', qrCodeController.getUserQRCodes);
+router.get('/qr-codes/:userId',authMiddleware,qrCodeController.getUserQRCodes);
 // DELETE: Delete a QR Code by ID
 router.delete('/qrcode/:qrCodeId', qrCodeController.deleteQRCode);
 
 
 // User management routes
-router.get('/users/:id', userController.getUserById);
+router.get("/users/:id",authMiddleware,userController.getUserById);
 router.put('/users/:id', userController.updateUserById);
 router.delete('/users/:id', userController.deleteUserById);
 
