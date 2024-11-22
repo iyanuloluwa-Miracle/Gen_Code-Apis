@@ -4,6 +4,7 @@ const userController = require('../controllers/user.controller');
 const qrCodeController = require('../controllers/qrcode.controller');
 const { createContactController } = require('../controllers/contact.controller');
 
+
 router.get('/', async (req, res, next) => {
   res.send({ message: 'Welcome to Gen_code api 🚀' });
 });

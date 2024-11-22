@@ -34,7 +34,7 @@ const validateResetToken = async (storedHash, token) => {
 };
 
 const generateAccessToken = (user) => {
-  return jwt.sign({ userId: user._id, email: user.email }, secret, { expiresIn: '9h' });
+  return jwt.sign({ userId: user._id, email: user.email }, secret, { expiresIn: '15m' });
 };
 
 module.exports = {
