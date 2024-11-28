@@ -3,7 +3,7 @@ const cron = require("node-cron");
 
 class KeepAliveService {
   constructor() {
-    this.baseUrl = process.env.BASE_URL || "http://localhost:3009/api";
+    this.baseUrl = process.env.BASE_URL || "http://localhost:3009";
     this.routes = [
       // Authentication Routes
       { path: "/api/login", method: "get" },
