@@ -9,6 +9,8 @@ require('dotenv').config();
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger-output.json');
+const keepAliveService = require("./utils/keepAlive");
+
 
 
 
@@ -20,6 +22,7 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
+keepAliveService.startKeepAlive();
 
 app.get('/', async (req, res, next) => {
   res.send({ message: 'Welcome to GEN_CODE api 🐱‍🚀' });
